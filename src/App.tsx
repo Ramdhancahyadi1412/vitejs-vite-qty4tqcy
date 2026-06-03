@@ -46,7 +46,7 @@ const monthKey = d => d.slice(0,7);
 const curMonth = () => today().slice(0,7);
 const monthLabel = m => new Date(m+"-01").toLocaleString("id-ID",{month:"long",year:"numeric"});
 
-const SHEETS_URL = "https://script.google.com/macros/s/AKfycbzYOKOqYzQJwaNLrmO7sAfDxWEK5hmem-ME9jAykTYVBA7tgpT0EnNYVRXRO0TpWYrE/exec";
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbyNrwz1uACYgGrGBOhsX4Zqlm5VSSDj7jTMmlOaDXajJnDDMP5q_evRfLoV_CU6M6WC/exec";
 
 function useStorage(key, init) {
   const [val, setVal] = useState(() => {
