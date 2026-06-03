@@ -46,7 +46,7 @@ const monthKey = d => d.slice(0,7);
 const curMonth = () => today().slice(0,7);
 const monthLabel = m => new Date(m+"-01").toLocaleString("id-ID",{month:"long",year:"numeric"});
 
-const SHEETS_URL = "https://script.google.com/macros/s/AKfycbyNrwz1uACYgGrGBOhsX4Zqlm5VSSDj7jTMmlOaDXajJnDDMP5q_evRfLoV_CU6M6WC/exec";
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbzYOKOqYzQJwaNLrmO7sAfDxWEK5hmem-ME9jAykTYVBA7tgpT0EnNYVRXRO0TpWYrE/exec";
 
 function useStorage(key, init) {
   const [val, setVal] = useState(() => {
@@ -179,14 +179,15 @@ export default function App() {
   const paidBySoft  = p => p==="Tara"?G.tealSoft:p==="Ramdhan"?G.accentSoft:"#EDE8F8";
 
   const s = {
-    wrap:    {background:G.bg, minHeight:"100vh", fontFamily:"-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif", paddingBottom:72, width:"100%", maxWidth:430, margin:"0 auto", boxSizing:"border-box"},
-    statusBar:{height:44,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 20px 0 24px",background:"transparent"},
+    wrap:    {background:G.bg, height:"100dvh", width:"100vw", maxWidth:430, margin:"0 auto", fontFamily:"-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif", display:"flex", flexDirection:"column", overflow:"hidden", position:"fixed", top:0, left:"50%", transform:"translateX(-50%)", boxSizing:"border-box"},
+    scroll:  {flex:1, overflowY:"auto", overflowX:"hidden", WebkitOverflowScrolling:"touch", paddingBottom:16},
+    statusBar:{height:44,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 20px 0 24px",background:"transparent", flexShrink:0},
     card:    {background:G.card,borderRadius:16,border:`1px solid ${G.cardBorder}`,padding:"14px 16px",marginBottom:10},
     label:   {fontSize:11,color:G.textSecondary,marginBottom:5,display:"block",letterSpacing:"0.06em",fontWeight:600,textTransform:"uppercase"},
     input:   {width:"100%",boxSizing:"border-box",background:G.inputBg,border:`1.5px solid ${G.cardBorder}`,borderRadius:10,padding:"10px 13px",fontSize:15,color:G.textPrimary,outline:"none",fontFamily:"inherit"},
     accentBtn:{background:`linear-gradient(135deg, ${G.accentMid}, ${G.accent})`,color:"#fff",border:"none",borderRadius:12,padding:"13px 20px",fontWeight:600,fontSize:15,cursor:"pointer",width:"100%",letterSpacing:"0.01em"},
     outlineBtn:{background:"transparent",color:G.accent,border:`1.5px solid ${G.accent}`,borderRadius:12,padding:"10px 20px",fontWeight:500,fontSize:14,cursor:"pointer"},
-    navBar:  {display:"flex",background:G.navBg,borderTop:`1px solid ${G.divider}`,position:"fixed",bottom:0,left:0,right:0,paddingBottom:12,paddingTop:6,maxWidth:430,margin:"0 auto",zIndex:50},
+    navBar:  {display:"flex",background:G.navBg,borderTop:`1px solid ${G.divider}`,paddingBottom:"env(safe-area-inset-bottom, 12px)",paddingTop:6, flexShrink:0, width:"100%"},
     navBtn:  active=>({flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:3,border:"none",background:"none",cursor:"pointer",padding:"4px 0",color:active?G.accent:G.textTertiary}),
   };
 
@@ -199,6 +200,9 @@ export default function App() {
           <span>●●●●</span><span>WiFi</span><span>🔋</span>
         </div>
       </div>
+
+      {/* Scrollable content */}
+      <div style={s.scroll}>
 
       {/* Alerts */}
       {alerts.length>0&&(
@@ -494,6 +498,8 @@ export default function App() {
           </div>
         </div>
       )}
+
+      </div>{/* end scroll */}
 
       {/* Nav */}
       <nav style={s.navBar}>
